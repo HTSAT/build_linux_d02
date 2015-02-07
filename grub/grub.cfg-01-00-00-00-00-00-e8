@@ -1,0 +1,18 @@
+#
+# Sample GRUB configuration file
+#
+
+# Boot automatically after 0 secs.
+set timeout=5
+
+# By default, boot the Euler/Linux
+set default=minilinux
+
+# For booting GNU/Linux
+menuentry "Mini-Linux" --id minilinux {
+	set root=(tftp,192.168.1.110)
+#	linux /arm_1P_pxe_1223/Image-0109 rdinit=/init console=ttyS0,115200 earlycon=uart8250,mmio32,0x80300000 root=/dev/nfs nfsroot=192.168.10.10:/nfs/rootfs ip=dhcp
+	linux /Image_3.16 rdinit=/init console=ttyS0,115200 earlycon=uart8250,mmio32,0x80300000
+	initrd /hulk-hip05.cpio.gz
+	devicetree /hip05-d02_3.16.dtb
+}
